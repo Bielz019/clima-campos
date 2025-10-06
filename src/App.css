@@ -1,0 +1,68 @@
+.container{
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f44898 0%, #4aa488 100%);
+  padding: 32px;
+}
+.content{
+  max-width: 768px;
+  margin: 0 auto;
+}
+header{
+  text-align: center;
+  margin-bottom: 32px;
+}
+header h1{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 2.25em;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+header p{
+  font-size: 1.1em;
+  color: #bdeafe;
+}
+.busca-box{
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px #000000a1;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+.busca-container{
+  display: flex;
+  gap: 10px;
+}
+.busca-container input{
+  flex: 1;
+  padding: 12px 16px;
+  border: 1px solid #787878;
+  border-radius: 16px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.busca-container input:focus{
+  border-color: #ff5487;
+  box-shadow: 0 0 0 3px #df6dc4;
+}
+.busca-container button{
+  padding: 12px 24px;
+  background: #f282bf;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.busca-container button:hover{
+  background: #9c0199;
+}
+.busca-container button:disabled{
+  cursor: not-allowed;
+  background: #8bb68d;
+}
