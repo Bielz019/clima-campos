@@ -66,28 +66,6 @@ header p{
   cursor: not-allowed;
   background: #9ca3af;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #card-resultado{
   background: #fff;
   border-radius: 12px;
@@ -126,3 +104,43 @@ header p{
 #temp-sens{
   color: #4b5563;
 }
+#detalhes-box{
+ display: grid;
+ grid-template-columns: repeat(3,1fr);
+ gap: 16px;
+}
+.detal-item{
+  background: #ccc;
+  padding: 16px;
+  border: radius 8px;
+  text-align: center
+
+  }
+  .detal-icone{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;
+  }
+  .detal-texto{
+    font-size: 0.8em;
+    color: #444;
+    margin-bottom: 4px;
+  }
+  .detal-valor{
+    font-weight: bold;
+    color: #222;
+  }
+
+
+  /* RESPONSIVO */
+  @media (max-width: 768px){
+    #detalhes-box{
+      grid-template-columns: 1fr;
+    }
+    #temp-valor{
+      font-size: 3em;
+    }
+    header h1{
+      font-size: 1.8em;
+    }
+  }
