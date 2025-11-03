@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './App.css'
-import { CloudSun, MapPinned, Thermometer, Droplets, Wind } from 'lucide-react';
+import { CloudSun, MapPinned, Thermometer, Droplet, Wind } from 'lucide-react';
 
 function App() {
   const [cidade, setCidade] = useState('');
@@ -19,6 +19,7 @@ function App() {
     setCarregando(true);
     setErro('');
 
+    // Try Executa os comandos
     try{
       const API_KEY = "50878f4678cd0841144b44b2fca0ccc0";
       const url = `https://api.openweathermap.org/data/2.5/weather?q=${cidade}&appid=${API_KEY}&units=metric&lang=pt_br`;
@@ -34,11 +35,18 @@ function App() {
     }catch (error){
       setErro(error.message);
       setClima(null);
-
     }finally{
-      setClima(null);
+      setCarregando(false);
     }
-  }
+  };
+
+  const handleKeyPress = (e) =>{
+    if (e.key === "Enter"){
+      buscarClima();
+    }
+  };
+
+
   return (
     <>
       <div className="container">
@@ -57,19 +65,30 @@ function App() {
               <input 
                 type="text"
                 placeholder="Digite o nome da cidade.."
+                value={cidade}
+                onChange={(e) => setCidade(e.target.value)}
+                onKeyDown={handleKeyPress}
               />
-              <button>Buscar</button>
+              <button
+                onClick={buscarClima}
+                disabled={carregando}
+              >
+                {carregando ? "Buscando..." : "Buscar"}
+              </button>
             </div>
+            {erro && <div className='erro-msg'>{erro}</div>}
           </div>
 
+          {clima && (<>
           {/* Resultado do Clima */}
           <div id="card-resultado">
             <div id="cidade-info">
               <div id="cidade-nome">
                 <MapPinned style={{color: '#550808ff'}} size={48} />
-                Campinas, BR
+                {clima.name}, {clima.sys.country}
               </div>
               <p id="cidade-desc">
+                {clima.weather[0].description}
                 Nublado
               </p>
             </div> {/* Fecha #cidade-desc*/}
@@ -82,12 +101,11 @@ function App() {
               </div>
             </div>
 
-
             <div id="detalhes-box">
-              {/* inicio temperatura */}
-              <div className="detal-item">
+              
+              <div className="detal-item">{/* Inicio Temperatura */}
                 <div className="detal-icone">
-                <Thermometer />
+                  <Thermometer />
                 </div>
                 <p className="detal-texto">
                   Min/Max
@@ -95,43 +113,37 @@ function App() {
                 <p className="detal-valor">
                   23ºC/27ºC
                 </p>
-              </div> {/* fim temperatura */}
+              </div>{/* Fim Temperatura */}
 
-
-
-                   {/* inicio umidade */}
-                   <div className="detal-item">
+              <div className="detal-item">{/* Inicio Umidade */}
                 <div className="detal-icone">
-                <Droplets />
+                  <Droplet />
                 </div>
                 <p className="detal-texto">
                   Umidade
                 </p>
                 <p className="detal-valor">
-                  17%
+                  12%
                 </p>
-              </div> {/* fim umidade */}
+              </div>{/* Fim Umidade */}
 
-
-
-                   {/* inicio vento */}
-                   <div className="detal-item">
+              <div className="detal-item">{/* Inicio Vento */}
                 <div className="detal-icone">
-                <Wind />
+                  <Wind />
                 </div>
                 <p className="detal-texto">
                   Vento
                 </p>
                 <p className="detal-valor">
-                  14km/h
+                  12 km/h
                 </p>
-              </div> {/* fim vento */}
+              </div>{/* Fim Vento */}
+
             </div>
 
 
           </div> {/* Fecha #card-resultado */}
-
-          
+          </>)};
         </div>
       </div>
     </>
